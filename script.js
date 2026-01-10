@@ -1,17 +1,23 @@
-let display = document.getElementById("display");
+let current = "";
 
-function appendValue(value) {
-  display.value += value;
-}
-
-function clearDisplay() {
-  display.value = "";
+function press(key) {
+    current += key;
+    document.getElementById("display").value = current;
 }
 
 function calculate() {
-  try {
-    display.value = eval(display.value);
-  } catch {
-    display.value = "Error";
-  }
+    try {
+        // Use eval safely for simple calculator
+        let result = eval(current);
+        document.getElementById("display").value = result;
+        current = result.toString();
+    } catch {
+        document.getElementById("display").value = "Error";
+        current = "";
+    }
+}
+
+function clearDisplay() {
+    current = "";
+    document.getElementById("display").value = "";
 }
